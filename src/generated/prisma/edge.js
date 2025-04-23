@@ -183,7 +183,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://bike_servicing_sli8_user:2MOb5BSnLO7niQvhvPfGjVlhWiZOEFkY@dpg-d04ica2li9vc73eqq2tg-a.oregon-postgres.render.com/bike_servicing_sli8"
+        "value": "postgresql://postgres.ggmpyyxiqevvsarbshff:DTmurSwhWf7Z4dAN@aws-0-eu-west-3.pooler.supabase.com:5432/postgres"
       }
     }
   },

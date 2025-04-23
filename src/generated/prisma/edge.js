@@ -183,7 +183,7 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://postgres:shakil123@localhost:5432/Bike_Service?schema=public"
+        "value": "postgresql://bike_servicing_sli8_user:2MOb5BSnLO7niQvhvPfGjVlhWiZOEFkY@dpg-d04ica2li9vc73eqq2tg-a.oregon-postgres.render.com/bike_servicing_sli8"
       }
     }
   },

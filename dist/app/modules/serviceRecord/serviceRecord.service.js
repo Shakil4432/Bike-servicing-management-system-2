@@ -25,7 +25,7 @@ const getAllServiceRecordsFromDB = () => __awaiter(void 0, void 0, void 0, funct
     return result;
 });
 const getServiceRecordByIdFromDB = (serviceRecordId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prisma_1.default.serviceRecord.findUnique({
+    const result = yield prisma_1.default.serviceRecord.findUniqueOrThrow({
         where: {
             serviceId: serviceRecordId,
         },

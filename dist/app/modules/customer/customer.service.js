@@ -25,7 +25,7 @@ const getAllCustomersFromDB = () => __awaiter(void 0, void 0, void 0, function* 
     return result;
 });
 const getCustomerByIdFromDB = (customerId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prisma_1.default.customer.findUnique({
+    const result = yield prisma_1.default.customer.findUniqueOrThrow({
         where: {
             customerId,
         },
@@ -33,6 +33,11 @@ const getCustomerByIdFromDB = (customerId) => __awaiter(void 0, void 0, void 0, 
     return result;
 });
 const customerUpdateByIdIntoDB = (customerId, customerData) => __awaiter(void 0, void 0, void 0, function* () {
+    yield prisma_1.default.customer.findUniqueOrThrow({
+        where: {
+            customerId,
+        },
+    });
     const result = yield prisma_1.default.customer.update({
         where: {
             customerId,
@@ -43,13 +48,11 @@ const customerUpdateByIdIntoDB = (customerId, customerData) => __awaiter(void 0,
 });
 const deleteCustomerByIdFromDB = (customerId) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield prisma_1.default.$transaction((prismaClient) => __awaiter(void 0, void 0, void 0, function* () {
-        // First delete all bikes related to the customer
         yield prismaClient.bike.deleteMany({
             where: {
                 customerId: customerId,
             },
         });
-        // Now safely delete the customer
         const deletedCustomer = yield prismaClient.customer.delete({
             where: {
                 customerId: customerId,

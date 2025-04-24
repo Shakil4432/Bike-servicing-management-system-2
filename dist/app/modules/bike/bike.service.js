@@ -25,7 +25,7 @@ const getAllBiksFromDB = () => __awaiter(void 0, void 0, void 0, function* () {
     return result;
 });
 const getBikeByIdFromDB = (bikeId) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield prisma_1.default.bike.findUnique({
+    const result = yield prisma_1.default.bike.findUniqueOrThrow({
         where: {
             bikeId,
         },

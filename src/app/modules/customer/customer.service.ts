@@ -14,7 +14,7 @@ const getAllCustomersFromDB = async () => {
 };
 
 const getCustomerByIdFromDB = async (customerId: string) => {
-  const result = await prisma.customer.findUnique({
+  const result = await prisma.customer.findUniqueOrThrow({
     where: {
       customerId,
     },
@@ -26,6 +26,11 @@ const customerUpdateByIdIntoDB = async (
   customerId: string,
   customerData: any
 ) => {
+  await prisma.customer.findUniqueOrThrow({
+    where: {
+      customerId,
+    },
+  });
   const result = await prisma.customer.update({
     where: {
       customerId,
@@ -37,14 +42,11 @@ const customerUpdateByIdIntoDB = async (
 
 const deleteCustomerByIdFromDB = async (customerId: string) => {
   const result = await prisma.$transaction(async (prismaClient) => {
-    // First delete all bikes related to the customer
     await prismaClient.bike.deleteMany({
       where: {
         customerId: customerId,
       },
     });
-
-    // Now safely delete the customer
     const deletedCustomer = await prismaClient.customer.delete({
       where: {
         customerId: customerId,
